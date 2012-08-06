@@ -60,7 +60,7 @@
 		var url = item[1];
 
 		var link = $('<li class="url"></li>').append(
-			$('<a>#</a>').attr('href', loc)).append(
+			$('<a class="hash">#</a>').attr('href', loc)).append(
 			$('<a></a>').attr('href', url).text(url));
 		$('#urls').append(link)
 	}

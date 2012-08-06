@@ -90,3 +90,7 @@ a {
 #urls {
 	min-height: 500px;
 }
+
+.url .a {
+	margin-left: 10px;
+}

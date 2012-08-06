@@ -1,4 +1,4 @@
-Irssi -> HTML
+Irssi to HTML
 =============
 
 This tool can convert a set of Irssi log into a full HTML website that support
