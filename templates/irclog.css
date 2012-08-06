@@ -94,3 +94,7 @@ a {
 .url .hash {
 	margin-right: 10px;
 }
+
+ul, ul li {
+	list-style-type: none;
+}
