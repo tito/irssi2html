@@ -1,0 +1,92 @@
+/* Alternative 2: table */
+
+table.irclog {
+    width: 100%;
+}
+table.irclog td {
+	padding: 1px 5px;
+	font-size: 0.8em;
+	font-family: 'Droid Sans Mono', sans-serif;
+
+}
+td.nick {
+    color: #ffffff;
+    padding: 1px 2px;
+	text-align: center;
+}
+td.talk {
+    width: 100%;
+    background: #eeeeee;
+}
+
+
+tr.action-status,
+tr.action-rename {
+	font-style: italic;
+}
+
+tr.action-enter,
+tr.action-leave {
+	display: none;
+}
+
+td.hour {
+	font-style: normal !important;
+	font-family: monospace;
+}
+
+html, body {
+	background: -webkit-radial-gradient(center center, #EBE8ED 0%, #DBDBDB 100%);
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #2E2633;
+}
+
+table {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #2E2633;
+}
+
+table.years, table.months {
+	border-collapse: collapse;
+}
+
+table.years td {
+	vertical-align: top;
+	text-align: center;
+}
+
+table.months {
+	margin: 0px 10px;
+}
+
+table.months td {
+	width: 40px;
+}
+
+h1, h2 {
+}
+
+a {
+	text-decoration: none;
+	color: #E68534;
+}
+
+.nav {
+	width: 100%;
+}
+
+.nav .index {
+	text-align: center;
+}
+
+.nav .after {
+	text-align: right;
+}
+
+.nav td {
+	width: 33%;
+}
+
+#urls {
+	min-height: 500px;
+}

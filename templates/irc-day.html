@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<title>{{ log.channel }} - {{ log.year }} - {{ log.month }}/{{ log.day }}</title>
+		<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,400italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{{ root }}/irclog.css" />
+
+	</head>
+	<body>
+		<div class="header">
+			<h1>{{ log.channel }} - {{ log.year }} - {{ log.month }}/{{ log.day }}</h1>
+		</div>
+
+		<table class="nav">
+		<tr><td class="before">
+			{% if before %}
+			<a href="{{ beforelink }}">&laquo; {{ before.year }} - {{ before.month }}/{{ before.day }}</a>
+			{% endif %}
+		</td>
+		<td class="index">
+			<a href="{{ root }}">Index</a>
+		</td>
+		<td class="after">
+			{% if after %}
+			<a href="{{ afterlink }}">{{ after.year }} - {{ after.month }}/{{ after.day }} &raquo;</a>
+			{% endif %}
+		</td></tr>
+		</table>
+
+		<table class="irclog">
+			{% for line in log.lines %}
+			<tr class="action-{{ line[0] }}">
+				{% if line[0] == "talk" %}
+				<td class="nick" style="background-color: #{{ line[2][1] }}">{{ line[2][0] }}</td>
+				<td class="talk" style="color: #{{ line[2][2] }}">{{ line[3] }}</td>
+				{% elif line[0] == "enter" %}
+				<td class="talk" colspan="2">{{ line[2][0] }} joined</td>
+				{% elif line[0] == "leave" %}
+				<td class="talk" colspan="2">{{ line[2][0] }} leaved</td>
+				{% elif line[0] == "status" %}
+				<td class="nick" style="background-color: #{{ line[2][1] }}">{{ line[2][0] }}</td>
+				<td class="talk" style="color: #{{ line[2][2] }}">{{ line[3] }}</td>
+				{% elif line[0] == "rename" %}
+				<td class="talk" colspan="2">{{ line[2][0] }} is now known as {{ line[3] }}</td>
+				{% else %}
+				{{ line }}
+				{% endif %}
+
+				<td class="hour">
+					<a name="L{{ loop.index }}"></a>
+					{{ line[1] }}
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+		<table class="nav">
+		<tr><td class="before">
+			{% if before %}
+			<a href="{{ beforelink }}">&laquo; {{ before.year }} - {{ before.month }}/{{ before.day }}</a>
+			{% endif %}
+		</td>
+		<td class="index">
+			<a href="{{ root }}">Index</a>
+		</td>
+		<td class="after">
+			{% if after %}
+			<a href="{{ afterlink }}">{{ after.year }} - {{ after.month }}/{{ after.day }} &raquo;</a>
+			{% endif %}
+		</td></tr>
+		</table>
+
+	</body>
+</html>

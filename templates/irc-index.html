@@ -1,0 +1,91 @@
+<html>
+<head>
+	<title>IRC log browser</title>
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,400italic' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="irclog.css" />
+	<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<div class="header">
+		<h1>IRC log browser</h1>
+	</div>
+
+	{% for channel, sub1 in logs.iteritems() %}
+	<h2>{{ channel }}</h2>
+
+	<table class="years">
+	<tr>
+		{% for year in sub1|sort(reverse=True) %}
+		<td>{{ year }}</td>
+		{% endfor %}
+	</tr>
+	<tr>
+		{% for year in sub1|sort(reverse=True) %}
+		<td>
+		<table class="months">
+			<tr>
+				{% for month in sub1[year]|sort(reverse=True) %}
+				<td>{{ month }}</td>
+				{% endfor %}
+			</tr>
+			<tr>
+				{% for month in sub1[year]|sort(reverse=True) %}
+				<td>
+				{% for day in sub1[year][month]|sort(reverse=True) %}
+				<a href="{{ sub1[year][month][day].link }}">{{ day }}</a>
+				{% endfor %}
+			</td>
+				{% endfor %}
+			</tr>
+		</table>
+		</td>
+		{% endfor %}
+	</tr>
+	</table>
+
+	{% endfor %}
+	<h2>Urls</h2>
+	<div class="nav">
+		Filter: <input type="text" id="urlfilter"></input>
+	</div>
+	<ul id="urls">
+	</ul>
+
+	<script type="text/javascript">
+	var urls = null;
+	function insert_link(item) {
+		var line = item[0][1];
+		var loc = urls[0][item[0][0]] + '#L' + line;
+		var url = item[1];
+
+		var link = $('<li class="url"></li>').append(
+			$('<a>#</a>').attr('href', loc)).append(
+			$('<a></a>').attr('href', url).text(url));
+		$('#urls').append(link)
+	}
+	$.get('urls.json', function(data) {
+		urls = data;
+		for (var index = urls.length - 1; index >= urls.length - 20; index--) {
+			insert_link(data[index]);
+		}
+
+		$('#urlfilter').change(function() {
+			var count = 0;
+			var text = $('#urlfilter').attr('value');
+			$('#urls').empty();
+			if ( text.length <= 2 )
+				return;
+			$(urls.reverse()).each(function(index, item) {
+				if ( count > 20 )
+					return;
+				if (item[1].search(text) == -1)
+					return;
+				insert_link(item);
+				count += 1;
+			});
+		});
+	});
+	</script>
+</body>
+</html>
