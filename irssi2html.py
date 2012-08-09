@@ -255,6 +255,7 @@ class LogGenerator(object):
                 index + 1, len(logfiles), len(url_list), len(search_dict) ))
             date, log = item
             htmlfn = log.html_fn
+            logfn = log.filename
             # check if it need to be updated
             if exists(htmlfn) and \
                 stat(logfn).st_mtime < stat(htmlfn).st_mtime:
